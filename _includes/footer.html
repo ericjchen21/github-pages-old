@@ -1,0 +1,42 @@
+<footer>
+  <section class="footer-section">
+    <div class="sec-a">
+      Contact me at:
+      <a href="mailto:ericjchen21@gmail.com" class="email"
+        >ericjchen21@gmail.com</a
+      >
+    </div>
+    <div class="sec-b">
+      <p>
+        Last Updated:
+        <span id="last-updated">{{ site.time | date: "%B %-d, %Y" }}</span>
+      </p>
+    </div>
+  </section>
+</footer>
+
+<script>
+  (function () {
+    const el = document.getElementById("last-updated");
+    if (!el) return;
+    // Public repo endpoint — update these values if you change owner/repo
+    const owner = "ericjchen21";
+    const repo = "ericjchen21.github.io";
+    const url = `https://api.github.com/repos/${owner}/${repo}`;
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error("network");
+        return res.json();
+      })
+      .then((data) => {
+        const pushed = data.pushed_at || data.updated_at || data.created_at;
+        if (!pushed) return;
+        const d = new Date(pushed);
+        const opts = { year: "numeric", month: "long", day: "numeric" };
+        el.textContent = d.toLocaleDateString(undefined, opts);
+      })
+      .catch(() => {
+        // leave the Liquid fallback if the API fails
+      });
+  })();
+</script>
