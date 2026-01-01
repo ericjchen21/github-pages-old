@@ -1,0 +1,30 @@
+.footer-section {
+  height: calc(5 * var(--std-unit));
+  width: 100vw;
+
+  @media (min-aspect-ratio: 1/1) {
+    max-width: var(--max-width);
+  }
+
+  padding: 2rem;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .sec-a {
+    justify-content: start;
+
+    .email {
+      color: var(--text-color);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .sec-b {
+    justify-content: right;
+  }
+}
